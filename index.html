@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>DitzzSamp Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root{
+    --blue-deep:#7FB3FF;
+    --blue-main:#2E6BFF;
+    --blue-mid:#5B93FF;
+    --blue-pale:rgba(46,107,255,0.14);
+    --white:#0D1526;
+    --ink:#EDF2FF;
+    --ink-soft:#93A6CC;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(0,0,0,0.45);
+    --error-red:#FF4D6A;
+    --bg-card:#0D1526;
+    --border-soft:rgba(91,147,255,0.16);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 100% -10%, #0d1b3d 0%, transparent 60%),
+      radial-gradient(1000px 500px at -10% 110%, #0a1330 0%, transparent 55%),
+      #05070c;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--blue-mid); color:#fff;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(5,7,12,0.8);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(91,147,255,0.12);
+    padding:18px 24px 0;
+  }
+  .DitzMek-row{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1100px; margin:0 auto; padding-bottom:14px;
+  }
+  .DitzMek{
+    display:flex; align-items:center; gap:10px;
+  }
+  .DitzMek-mark{
+    width:38px; height:38px; border-radius:11px;
+    background:linear-gradient(145deg, var(--blue-mid), var(--blue-deep));
+    display:flex; align-items:center; justify-content:center;
+    color:#FFFFFF; font-family:'Sora',sans-serif; font-weight:800; font-size:16px;
+    box-shadow:var(--shadow);
+  }
+  .DitzMek-name{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:19px; letter-spacing:-0.02em;
+    color:var(--blue-deep);
+  }
+  .DitzMek-name span{ color:var(--blue-mid); }
+
+  /* ---------- SWIPE NAV ---------- */
+  .nav-wrap{
+    max-width:1100px; margin:0 auto;
+    position:relative;
+  }
+  .nav-scroll{
+    display:flex; gap:8px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    padding:2px 2px 16px;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .nav-scroll::-webkit-scrollbar{display:none;}
+  .nav-item{
+    scroll-snap-align:start;
+    white-space:nowrap;
+    font-family:'Sora',sans-serif;
+    font-weight:600; font-size:14px;
+    color:var(--ink-soft);
+    background:transparent;
+    border:1px solid transparent;
+    padding:9px 16px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:.25s ease;
+    flex:0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-item:hover{ color:var(--blue-main); }
+  .nav-item.active{
+    color:#fff;
+    background:linear-gradient(120deg, var(--blue-main), var(--blue-mid));
+    box-shadow:var(--shadow);
+  }
+
+  /* ---------- SECTIONS (swipeable panels) ---------- */
+  main{
+    max-width:1100px; margin:0 auto;
+    padding:8px 24px 20px;
+  }
+  .panels{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:0;
+    scroll-behavior:smooth;
+    -ms-overflow-style:none; scrollbar-width:none;
+    border-radius:22px;
+    align-items: flex-start;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: hidden;
+  }
+  .panels::-webkit-scrollbar{display:none;}
+  .panel{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    padding:20px 8px 10px;
+    min-height: auto;
+  }
+
+  .section-eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; color:var(--blue-main);
+    background:var(--blue-pale); padding:5px 12px; border-radius:100px; margin-bottom:14px;
+  }
+  .section-title{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(24px,4vw,34px);
+    color:var(--blue-deep); letter-spacing:-0.02em; margin-bottom:10px;
+  }
+  .section-desc{
+    color:var(--ink-soft); font-size:14.5px; max-width:520px; margin-bottom:26px;
+  }
+
+  .placeholder-card{
+    border:1.5px dashed rgba(91,147,255,0.3);
+    background:linear-gradient(180deg, rgba(46,107,255,0.1) 0%, #0A1220 100%);
+    border-radius:var(--radius);
+    padding:26px;
+    color:var(--ink-soft);
+    font-size:14px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .placeholder-card .ph-icon{
+    width:40px; height:40px; border-radius:12px; flex:0 0 auto;
+    background:#0A1220; border:1px solid rgba(91,147,255,0.2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; color:var(--blue-main);
+  }
+  .placeholder-card b{ color:var(--blue-deep); }
+
+  .card-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+  }
+  .white-card{
+    background:#0A1220; border-radius:var(--radius);
+    border:1px solid rgba(91,147,255,0.12);
+    box-shadow:var(--shadow);
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+  }
+  .white-card h4{
+    font-family:'Sora',sans-serif; color:var(--blue-deep); font-size:15.5px; margin-bottom:8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .white-card p{ font-size:13px; color:var(--ink-soft); line-height:1.5; flex-grow:1; }
+  .tag-row{ display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  .tag{
+    font-size:11px; font-weight:600; color:var(--blue-main);
+    background:var(--blue-pale); padding:4px 10px; border-radius:100px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .tag-premium{
+    font-size:11px; font-weight:600; color:#f1c40f;
+    background:rgba(241,196,15,0.12); padding:4px 10px; border-radius:100px;
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .btn-order {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: linear-gradient(120deg, var(--blue-main), var(--blue-mid));
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: 0.25s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(27,95,224,0.2);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-order:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27,95,224,0.3);
+  }
+
+  .benefit-list {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding-left: 0;
+    list-style: none;
+    line-height: 1.6;
+  }
+  .benefit-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 6px;
+  }
+  .benefit-list li i {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--blue-main);
+    font-size: 12px;
+  }
+
+  .contact-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;
+  }
+  .contact-item{
+    background:#0A1220; border-radius:16px; padding:18px;
+    border:1px solid rgba(91,147,255,0.12); box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:6px;
+    text-decoration:none;
+    transition: 0.2s ease;
+  }
+  .contact-item:hover{
+    transform: translateY(-3px);
+  }
+  .contact-item .c-label{
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--blue-main);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .contact-item .c-value{ font-size:13.5px; color:var(--ink-soft); font-weight:600;}
+
+  .dots{
+    display:flex; justify-content:center; gap:7px; margin-top:22px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:rgba(27,95,224,0.2);
+    transition:.25s;
+  }
+  .dot.active{ background:var(--blue-main); width:20px; border-radius:100px; }
+
+  .bottom-photo{
+    margin-top:20px;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(27,95,224,0.09);
+  }
+  .bottom-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  footer{
+    text-align:center; padding:18px 24px 30px;
+    font-size:12px; color:var(--ink-soft);
+  }
+  footer b{ color:var(--blue-main); }
+
+  @media (max-width:640px){
+    .section-title{ font-size:24px; }
+    header{ padding:14px 16px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="DitzMek-row">
+    <div class="DitzMek">
+      <div>
+        <i class="fa-solid fa-store"></i>
+      </div>
+      <div class="DitzMek-name">Ditzz<span>Samp</span> Store</div>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <div class="nav-scroll" id="navScroll">
+      <div class="nav-item active" data-index="0"><i class="fa-solid fa-house"></i> Home</div>
+      <div class="nav-item" data-index="1"><i class="fa-solid fa-server"></i> List Hosting</div>
+      <div class="nav-item" data-index="2"><i class="fa-solid fa-star"></i> List Review</div>
+      <div class="nav-item" data-index="3"><i class="fa-solid fa-address-book"></i> Kontak & Testimoni</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="panels" id="panels">
+
+    <section class="panel" id="panel-0">
+      <span class="section-eyebrow"><i class="fa-solid fa-door-open"></i> Beranda</span>
+      <h2 class="section-title">Selamat Datang di <span style="color:var(--blue-mid)">DitzzSamp Store</span></h2>
+      <p class="section-desc" style="max-width:600px;">Selamat datang di DitzzSamp Store, di sini kami menjual jasa review dan menjual hosting GTA SAMP atau panel bot yang 100% aman dan terpercaya.</p>
+      <div class="bottom-photo">
+        <img src="https://i.ibb.co.com/FL7q2zZH/IMG-20260718-WA0016.jpg" alt="DitzzSamp Store">
+      </div>
+    </section>
+
+    <section class="panel" id="panel-1">
+      <span class="section-eyebrow"><i class="fa-solid fa-bolt"></i> Layanan</span>
+      <h2 class="section-title">List Hosting</h2>
+      <p class="section-desc">Pilihan hosting server SA-MP sesuai kebutuhan. Legal, garansi full 1 bulan, ping stabil!</p>
+
+      <h3 style="font-family:'Sora',sans-serif; color:var(--blue-deep); font-size:18px; margin: 10px 0 16px;">Pilihan Slot Hosting</h3>
+      <div class="card-grid" style="margin-bottom: 30px;">
+        <div class="white-card">
+          <h4>20 Slot Player</h4>
+          <p>Cocok untuk tahap development.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-users"></i> 20</span><span class="tag"><i class="fa-solid fa-tag"></i> Rp 5.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%205.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>35 Slot Player</h4>
+          <p>Untuk server rame 20-35 on IC.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-users"></i> 35</span><span class="tag"><i class="fa-solid fa-tag"></i> Rp 10.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2010.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>50 Slot Player</h4>
+          <p>Performa stabil untuk roleplay harian.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-users"></i> 50</span><span class="tag"><i class="fa-solid fa-tag"></i> Rp 15.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2015.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>80 Slot Player</h4>
+          <p>Bisa tampung traffic menengah-tinggi.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-users"></i> 80</span><span class="tag"><i class="fa-solid fa-tag"></i> Rp 25.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2025.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>100 Slot Player</h4>
+          <p>Paket populer untuk server yang mulai rame.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-users"></i> 100</span><span class="tag"><i class="fa-solid fa-tag"></i> Rp 30.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2030.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>150 Slot Player</h4>
+          <p>Pilihan tepat untuk server besar.</p>
+          <div class="tag-row"><span class="tag-premium"><i class="fa-solid fa-users"></i> 150</span><span class="tag-premium"><i class="fa-solid fa-tag"></i> Rp 50.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2050.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>200 Slot Player</h4>
+          <p>The Ultimate, siap nampung ratusan player.</p>
+          <div class="tag-row"><span class="tag-premium"><i class="fa-solid fa-users"></i> 200</span><span class="tag-premium"><i class="fa-solid fa-tag"></i> Rp 65.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Beli%20Hosting%20Yang%20Rp%2065.000" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+      </div>
+
+      <div class="white-card">
+        <h4><i class="fa-solid fa-award" style="color:var(--blue-main);"></i> Keuntungan Hosting</h4>
+        <ul class="benefit-list">
+          <li><i class="fa-solid fa-check"></i> Pastinya <b>Harga Murah</b>, server pun lancar.</li>
+          <li><i class="fa-solid fa-check"></i> <b>MySQL + Phpmyadmin</b> - Akses full, import DB 100MB juga lewat.</li>
+          <li><i class="fa-solid fa-check"></i> <b>Anti DDos Protection Standar</b>.</li>
+          <li><i class="fa-solid fa-check"></i> <b>Anti Spy</b> - Bocil stress gak bakal tembus!</li>
+          <li><i class="fa-solid fa-check"></i> <b>Server Legal 100%</b> - Lisensi resmi, bukan nulled.</li>
+          <li><i class="fa-solid fa-check"></i> <b>Free Port Voice</b>.</li>
+          <li><i class="fa-solid fa-check"></i> File server kalian dipastikan <b>100% Aman</b>.</li>
+          <li><i class="fa-solid fa-check"></i> Hosting Garansi Full 1 Bulan.</li>
+          <li><i class="fa-solid fa-check"></i> Aktif Full 1 Bulan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-2">
+      <span class="section-eyebrow"><i class="fa-solid fa-bullhorn"></i> Promosi</span>
+      <h2 class="section-title">List Jasa Review</h2>
+      <p class="section-desc">Pilih paket ulasan / review server kamu untuk menarik lebih banyak player!</p>
+      
+      <h3 style="font-family:'Sora',sans-serif; color:var(--blue-deep); font-size:18px; margin: 10px 0 16px;">Via Subscribe</h3>
+      <div class="card-grid" style="margin-bottom: 30px;">
+        <div class="white-card">
+          <h4>Paket 8 Subs</h4>
+          <p>Review mendalam untuk 5 Tempat / Fitur server kamu.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-brands fa-youtube"></i> 8 Subscribe</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%208%20Subscribe" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>Paket 10 Subs</h4>
+          <p>Review mendalam untuk 7 Tempat / Fitur server kamu.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-brands fa-youtube"></i> 10 Subscribe</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%2010%20Subscribe" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>Paket 15 Subs</h4>
+          <p>Review mendalam untuk 9 Tempat / Fitur server kamu.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-brands fa-youtube"></i> 15 Subscribe</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%2015%20Subscribe" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Sora',sans-serif; color:var(--blue-deep); font-size:18px; margin: 10px 0 16px;">Via Bayar</h3>
+      <div class="card-grid">
+        <div class="white-card">
+          <h4>Paket 5K</h4>
+          <p>Review keren untuk 6 Tempat / Fitur.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-wallet"></i> Rp 5.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%205K" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>Paket 15K</h4>
+          <p>Review keren untuk 10 Tempat / Fitur.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-wallet"></i> Rp 15.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%2015K" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>Paket 20K</h4>
+          <p>Review detail untuk 14 Tempat / Fitur.</p>
+          <div class="tag-row"><span class="tag"><i class="fa-solid fa-wallet"></i> Rp 20.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%2020K" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+        <div class="white-card">
+          <h4>Paket 35K (VIP)</h4>
+          <p><b>No Antri!</b> Langsung gas review 17 Tempat / Fitur.</p>
+          <div class="tag-row"><span class="tag-premium"><i class="fa-solid fa-wallet"></i> Rp 35.000</span></div>
+          <a href="https://wa.me/6285215311435?text=Om%20Ditzz%20Mau%20Jasa%20Review%20Server%20Yang%2035K" class="btn-order" target="_blank"><i class="fa-brands fa-whatsapp"></i> Order Sekarang</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-3">
+      <span class="section-eyebrow"><i class="fa-solid fa-link"></i> Terhubung</span>
+      <h2 class="section-title">Kontak &amp; Komunitas</h2>
+      <p class="section-desc">Masih ragu atau ingin bertanya? Jangan ragu hubungi kami, 100% Aman dan Terpercaya!</p>
+      <div class="contact-grid">
+        <a href="https://wa.me/6285215311435" target="_blank" class="contact-item">
+          <span class="c-label"><i class="fa-brands fa-whatsapp" style="font-size:14px;"></i> WhatsApp Admin</span>
+          <span class="c-value">+62 852-1531-1435</span>
+        </a>
+        <a href="https://whatsapp.com/channel/0029Vb7XBtN4NViqrvyVdE25" target="_blank" class="contact-item">
+          <span class="c-label"><i class="fa-solid fa-users" style="font-size:14px;"></i> Saluran WhatsApp</span>
+          <span class="c-value">DitzSamp Saluran</span>
+        </a>
+      </div>
+      <div class="placeholder-card" style="margin-top:16px;">
+        <div class="ph-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><b>100% Trusted</b> — Gak perlu nanya aman apa nggak, udah pasti aman bosku. Gass Order Sekarang!</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="dots" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</main>
+
+<footer>
+  Dibuat Oleh <b>Developer Prvt DitzzSamp Store</b> — Geser Untuk Melihat Menu Yg Lain
+</footer>
+
+<script>
+  // ---------- LOGIKA SWIPE NAVIGASI ----------
+  const panelsEl = document.getElementById('panels');
+  const navItems = Array.from(document.querySelectorAll('.nav-item'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const navScroll = document.getElementById('navScroll');
+  let panelWidth = panelsEl.clientWidth;
+
+  function updateContainerHeight(index) {
+    const activePanel = document.getElementById(`panel-${index}`);
+    if (activePanel) {
+      panelsEl.style.height = activePanel.offsetHeight + 'px';
+    }
+  }
+
+  function setActive(index){
+    navItems.forEach((el,i)=> el.classList.toggle('active', i===index));
+    dots.forEach((el,i)=> el.classList.toggle('active', i===index));
+    updateContainerHeight(index);
+
+    const activeNav = navItems[index];
+    if(activeNav){
+      navScroll.scrollTo({
+        left: activeNav.offsetLeft - 20,
+        behavior:'smooth'
+      });
+    }
+  }
+
+  navItems.forEach(item=>{
+    item.addEventListener('click', ()=>{
+      const index = parseInt(item.dataset.index,10);
+      panelWidth = panelsEl.clientWidth;
+      panelsEl.scrollTo({ left: index*panelWidth, behavior:'smooth' });
+      setActive(index);
+    });
+  });
+
+  let scrollTimeout;
+  panelsEl.addEventListener('scroll', ()=>{
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(()=>{
+      panelWidth = panelsEl.clientWidth;
+      const index = Math.round(panelsEl.scrollLeft / panelWidth);
+      setActive(index);
+    }, 60);
+  });
+
+  window.addEventListener('load', () => {
+    setActive(0);
+  });
+
+  window.addEventListener('resize', ()=>{
+    panelWidth = panelsEl.clientWidth;
+    const index = Math.round(panelsEl.scrollLeft / panelWidth);
+    updateContainerHeight(index);
+  });
+
+  // Update tinggi panel ulang setelah gambar selesai dimuat (mencegah ruang kosong di panel Home)
+  document.querySelectorAll('.bottom-photo img').forEach(img => {
+    img.addEventListener('load', () => {
+      const activeIndex = navItems.findIndex(el => el.classList.contains('active'));
+      updateContainerHeight(activeIndex >= 0 ? activeIndex : 0);
+    });
+  });
+</script>
+
+</body>
+</html>
