@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ditz SAMP — Hosting & Jasa Review SA-MP</title>
+<link rel="icon" type="image/jpeg" href="https://i.ibb.co.com/hRC3CXr8/IMG-20260803-WA0005.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root{
+    --bg: #f4f8ff;
+    --surface: #ffffff;
+    --surface-2: #eaf2ff;
+    --line: #d3e2fb;
+    --text: #0b2545;
+    --muted: #5b7aa3;
+    --accent: #2563eb;
+    --accent-2: #3b82f6;
+    --violet: #1d4ed8;
+    --teal: #0ea5e9;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .blob{
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .blob-1{ width: 480px; height: 480px; background: var(--accent); top: -160px; left: -120px; opacity: 0.16; }
+  .blob-2{ width: 420px; height: 420px; background: var(--violet); top: 20%; right: -160px; opacity: 0.12; }
+  .blob-3{ width: 360px; height: 360px; background: var(--teal); bottom: -140px; left: 30%; opacity: 0.10; }
+
+  .wrap{ max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  h1,h2,h3{ font-family: 'Sora', sans-serif; letter-spacing: -0.02em; }
+  a{ color: inherit; text-decoration: none; }
+  ::selection{ background: var(--accent); color: #ffffff; }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  header{ position: sticky; top: 0; z-index: 50; padding: 18px 0; }
+  .navcaps{
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 10px 10px 22px;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.08);
+  }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:'Sora'; font-weight: 700; font-size: 17px; }
+  .logo-img{
+    width: 34px; height: 34px; border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .navcaps .btn{ padding: 10px 20px; font-size: 13.5px; }
+
+  .btn{
+    display: inline-flex; align-items:center; gap:8px;
+    padding: 14px 26px; border-radius: 999px;
+    font-weight: 600; font-size: 14.5px;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #051021;
+  }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 28px rgba(59,130,246,0.35); }
+  .btn-ghost{
+    background: var(--surface); color: var(--text);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  .hero{ padding: 70px 0 40px; text-align: center; }
+  .eyebrow{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted); font-weight: 500;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 8px 18px; border-radius: 999px;
+    margin-bottom: 26px;
+  }
+  .eyebrow .dot2{ width:6px; height:6px; border-radius:50%; background: var(--teal); }
+  .hero h1{
+    font-size: clamp(30px, 5.4vw, 50px);
+    font-weight: 800; line-height: 1.12;
+    max-width: 780px; margin: 0 auto;
+  }
+  .hero h1 .grad{
+    background: linear-gradient(120deg, var(--accent), var(--violet));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p{ margin: 22px auto 0; color: var(--muted); font-size: 16.5px; max-width: 520px; }
+  .hero-actions{ margin-top: 34px; display: flex; justify-content:center; flex-wrap: wrap; gap: 12px; }
+
+  .pill-stats{ margin-top: 52px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+  .pill-stat{
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 12px 20px 12px 12px;
+    border-radius: 999px;
+  }
+  .pill-stat .num{
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface-2);
+    font-weight: 700; font-size: 12.5px; color: var(--teal);
+    flex-shrink: 0;
+  }
+  .pill-stat .label{ font-size: 13px; color: var(--muted); text-align: left; }
+  .pill-stat .label strong{ display:block; color: var(--text); font-size: 14px; }
+
+  section{ padding: 68px 0; }
+  .sec-head{ margin-bottom: 36px; max-width: 600px; }
+  .sec-tag{
+    display: inline-block;
+    font-size: 12.5px; font-weight: 600; color: var(--accent);
+    background: rgba(59,130,246,0.14);
+    padding: 5px 14px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .sec-head h2{ font-size: clamp(22px, 3.6vw, 30px); font-weight: 700; }
+  .sec-head p{ color: var(--muted); margin-top: 10px; font-size: 15px; }
+
+  .tabs{
+    display: inline-flex; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px; margin-bottom: 26px; gap: 4px;
+  }
+  .tab{
+    padding: 10px 22px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 600; color: var(--muted);
+    cursor: pointer; user-select: none;
+    transition: all .18s ease;
+    background: transparent; border: none;
+  }
+  .tab.active{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #051021; }
+
+  .review-panel{ display: none; }
+  .review-panel.active{ display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 14px; }
+  .rev-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    padding: 26px 24px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .rev-card:hover{ border-color: var(--accent); transform: translateY(-3px); }
+  .rev-card .price{ font-family: 'Sora'; font-size: 25px; font-weight: 700; color: var(--accent-2); }
+  .rev-card .price small{ font-size: 12.5px; color: var(--muted); font-weight: 500; }
+  .rev-card .slots{ margin-top: 8px; font-size: 13.5px; color: var(--muted); }
+  .rev-card .badge{
+    display: inline-block; margin-top: 12px;
+    font-size: 11.5px; font-weight: 600; color: var(--teal); background: rgba(86,200,255,0.14);
+    padding: 4px 12px; border-radius: 999px;
+  }
+
+  .host-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 14px; }
+  .host-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    padding: 22px;
+    display: flex; align-items: center; gap: 16px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .host-card:hover{ border-color: var(--teal); transform: translateY(-3px); }
+  .ring{
+    position: relative;
+    width: 62px; height: 62px; border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: conic-gradient(var(--accent) calc(var(--pct) * 1%), var(--surface-2) 0);
+  }
+  .ring::before{ content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); }
+  .ring span{ position: relative; font-size: 11px; font-weight: 700; color: var(--text); }
+  .host-info{ flex: 1; min-width: 0; }
+  .host-info .slot-label{ font-weight: 700; font-size: 15px; }
+  .host-info .price-row{ display: flex; align-items: baseline; gap: 6px; margin-top: 4px; }
+  .host-info .price-row .price{ color: var(--accent-2); font-weight: 700; font-size: 15px; }
+  .host-info .price-row .per{ font-size: 11.5px; color: var(--muted); }
+  .host-order{
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface-2); color: var(--teal);
+    font-size: 16px; flex-shrink: 0;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .host-order:hover{ background: var(--teal); color: #0d0b12; transform: scale(1.08); }
+
+  .feat-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; }
+  .feat{ background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 24px; }
+  .feat .icon{
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface-2); color: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .feat h3{ font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .feat p{ font-size: 13.5px; color: var(--muted); }
+
+  .trust{
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 16px 26px;
+    margin-top: 22px;
+  }
+  .trust .mark{
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(86,200,255,0.16); color: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; flex-shrink: 0;
+  }
+  .trust p{ font-size: 14px; color: var(--muted); }
+  .trust strong{ color: var(--text); }
+
+  .cta-block{
+    text-align: center;
+    padding: 60px 30px;
+    background: linear-gradient(160deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--line);
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block h2{ font-size: clamp(22px,3.8vw,32px); }
+  .cta-block p{ color: var(--muted); margin-top: 10px; }
+  .cta-actions{ margin-top: 28px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+  footer{ padding: 34px 0 46px; text-align: center; color: var(--muted); font-size: 13px; }
+
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-btn{
+    position: fixed; right: 20px; bottom: 20px; z-index: 60;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(59,130,246,0.4);
+    cursor: pointer; border: none;
+    transition: transform .18s ease;
+  }
+  .music-btn:hover{ transform: scale(1.06); }
+  .music-btn svg{ width: 20px; height: 20px; fill: #051021; }
+  .music-btn .bars{ display:flex; align-items:flex-end; gap:3px; height: 16px; }
+  .music-btn .bars span{
+    width: 3px; background: #051021; border-radius: 2px;
+    animation: eq 0.9s ease-in-out infinite;
+  }
+  .music-btn .bars span:nth-child(1){ height: 6px; animation-delay: 0s; }
+  .music-btn .bars span:nth-child(2){ height: 14px; animation-delay: .15s; }
+  .music-btn .bars span:nth-child(3){ height: 9px; animation-delay: .3s; }
+  .music-btn.paused .bars span{ animation-play-state: paused; height: 5px !important; }
+  @keyframes eq{ 0%,100%{ transform: scaleY(0.4); } 50%{ transform: scaleY(1); } }
+
+  /* ---------- RATING ---------- */
+  .rating-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    padding: 32px;
+  }
+  .stars{ display:flex; gap: 4px; flex-wrap: wrap; margin: 18px 0 6px; }
+  .star-btn{
+    width: 44px; height: 44px;
+    border: none; background: transparent;
+    font-size: 24px; line-height: 1;
+    cursor: pointer; transition: transform .15s ease, color .15s ease;
+    color: var(--line);
+  }
+  .star-btn:hover{ transform: scale(1.15); }
+  .star-btn.selected{ color: #ffcf4d; }
+  .rating-hint{ font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .rating-msg{
+    width: 100%; margin-top: 18px;
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 20px; padding: 14px 18px;
+    color: var(--text); font-family: 'Inter'; font-size: 14px;
+    resize: vertical; min-height: 90px;
+  }
+  .rating-msg:focus{ outline: none; border-color: var(--accent); }
+  .rating-msg::placeholder{ color: var(--muted); }
+  .rating-submit{ margin-top: 18px; border: none; cursor: pointer; }
+
+  /* ---------- ORDER BUTTONS ---------- */
+  .rev-card{ display:flex; flex-direction:column; }
+  .rev-card .host-order{ align-self: flex-start; margin-top: 16px; }
+  .host-order{ border: none; cursor: pointer; }
+
+  /* ---------- ORDER MODAL ---------- */
+  .modal-overlay{
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(3,5,10,0.78);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .modal-overlay.open{ opacity: 1; pointer-events: auto; }
+  .modal-box{
+    width: 100%; max-width: 420px;
+    max-height: 90vh; overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 28px;
+    position: relative;
+    transform: translateY(12px);
+    transition: transform .2s ease;
+  }
+  .modal-overlay.open .modal-box{ transform: translateY(0); }
+  .modal-close{
+    position: absolute; top: 18px; right: 18px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--surface-2); color: var(--text);
+    border: none; cursor: pointer; font-size: 14px;
+  }
+  .modal-box h3{ font-size: 18px; margin-bottom: 18px; }
+  .order-detail{
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+  .detail-row{ display:flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 6px 0; }
+  .detail-row span{ color: var(--muted); }
+  .detail-row strong{ color: var(--accent-2); text-align: right; }
+  .detail-warning{
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px; font-weight: 700; color: #ffb454;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .qr-img{
+    width: 100%; border-radius: 18px; border: 1px solid var(--line);
+    margin-bottom: 14px; display: block;
+  }
+  .modal-note{ font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .modal-note-tf{
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+  }
+  .done-btn{ width: 100%; justify-content: center; }
+  .done-btn:disabled{ opacity: 0.45; cursor: not-allowed; }
+  .done-btn:disabled:hover{ transform: none; box-shadow: none; }
+
+  @media (max-width: 640px){
+    .navcaps{ padding: 8px 8px 8px 14px; }
+    .navcaps .btn{ padding: 9px 16px; font-size: 12.5px; }
+    .logo{ font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- NAV USER CHIP ---------- */
+  .nav-right{ display: flex; align-items: center; gap: 10px; }
+  .user-chip{
+    display: none; align-items: center; gap: 8px;
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 6px 6px 16px;
+    font-size: 13px; font-weight: 600; color: var(--text);
+  }
+  .user-chip i.fa-circle-user{ color: var(--accent); }
+  .user-chip i.fa-crown{ color: #f5a524; margin-left: 2px; }
+  .user-chip button{
+    display: none;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: none; background: transparent; color: var(--muted);
+    cursor: pointer; align-items: center; justify-content: center;
+    transition: background .18s ease, color .18s ease;
+  }
+  .user-chip button:hover{ background: #fde8e6; color: #e0554d; }
+
+  /* ---------- HAMBURGER MENU (sidebar geser, konsisten dgn Noctive) ---------- */
+  .menu-toggle-btn{
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--text);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: background .18s ease, color .18s ease;
+  }
+  .menu-toggle-btn:hover{ background: var(--accent); color: #fff; }
+
+  .side-menu-backdrop{
+    position: fixed; inset: 0; background: rgba(11,37,69,0.35);
+    backdrop-filter: blur(2px); z-index: 998; opacity: 0; pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .side-menu-backdrop.open{ opacity: 1; pointer-events: auto; }
+
+  .side-menu{
+    position: fixed; top: 0; right: -300px; height: 100%; width: 280px;
+    background: var(--surface); z-index: 999;
+    transition: right .32s cubic-bezier(.4,0,.2,1);
+    padding: 26px 20px; border-left: 1px solid var(--line);
+    box-shadow: -18px 0 34px rgba(15,23,42,0.16);
+    overflow-y: auto; display: flex; flex-direction: column;
+  }
+  .side-menu.open{ right: 0; }
+  .side-menu-header{
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line);
+  }
+  .side-menu-title{ font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; }
+  .side-menu-close{
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--surface-2); border: none; color: var(--muted);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background .18s ease, color .18s ease;
+  }
+  .side-menu-close:hover{ background: #fde8e6; color: #e0554d; }
+  .side-menu-item{
+    display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+    padding: 14px 18px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 14px;
+    color: var(--text); margin-bottom: 8px; border: 1px solid transparent; background: transparent;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+  }
+  .side-menu-item i{ width: 16px; color: var(--muted); }
+  .side-menu-item:hover{ background: var(--surface-2); border-color: var(--line); }
+  .side-menu-item.active{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+  .side-menu-item.active i{ color: #fff; }
+
+  /* ---------- COMMUNITY SLIDER ---------- */
+  .slider-head{ display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+  .slider-viewport{ overflow: hidden; }
+  .slider-track{ display: flex; width: 200%; transition: transform .4s cubic-bezier(.4,0,.2,1); }
+  .slider-panel{
+    width: 50%; flex-shrink: 0; padding: 2px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 14px;
+    align-content: start;
+  }
+  .community-card{
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .community-card:hover{ transform: translateY(-3px); border-color: var(--accent); }
+  .community-card img{ width: 100%; height: 150px; object-fit: cover; display: block; background: var(--surface-2); }
+  .community-card .body{ padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .community-card .desc{ font-size: 13.5px; color: var(--text); flex: 1; }
+  .community-card .meta{ font-size: 11.5px; color: var(--muted); display: flex; justify-content: space-between; }
+  .community-card .link-btn{ justify-content: center; padding: 10px 18px; font-size: 13px; }
+  .empty-note{ color: var(--muted); font-size: 14px; grid-column: 1/-1; text-align: center; padding: 30px 0; }
+
+  /* ---------- ADD FAB ---------- */
+  .add-fab{
+    position: fixed; right: 20px; bottom: 86px; z-index: 60;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; border: none; cursor: pointer;
+    display: none; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+    transition: transform .18s ease;
+  }
+  .add-fab:hover{ transform: scale(1.08) rotate(90deg); }
+
+  /* ---------- AUTH / ADD FORM ---------- */
+  #authModal .modal-box, #addModal .modal-box{ text-align: left; }
+  .form-input{
+    width: 100%; background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 16px; padding: 13px 16px; color: var(--text);
+    font-family: 'Inter'; font-size: 14px; margin-bottom: 12px;
+  }
+  .form-input:focus{ outline: none; border-color: var(--accent); }
+  .form-input::placeholder{ color: var(--muted); }
+  .form-label{ display: block; font-size: 13px; font-weight: 600; color: var(--text); margin: 14px 0 6px; }
+  .file-input{ width: 100%; font-size: 13px; color: var(--muted); }
+  body.auth-locked{ overflow: hidden; }
+
+  /* ---------- CUSTOM FILE PICKER (no native browser style) ---------- */
+  .file-picker{ position: relative; display: block; cursor: pointer; }
+  .file-picker input[type="file"]{
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer; margin: 0;
+  }
+  .file-picker-btn{
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 16px; border-radius: 16px;
+    border: 2px dashed var(--line); background: var(--surface-2);
+    color: var(--muted); font-weight: 700; font-size: 13.5px;
+    transition: border-color .18s ease, color .18s ease, background .18s ease;
+  }
+  .file-picker:hover .file-picker-btn{ border-color: var(--accent); color: var(--accent); background: #eaf2ff; }
+  .file-picker-btn i{ font-size: 16px; }
+  .file-picker-preview{
+    display: none; align-items: center; gap: 12px;
+    margin-top: 10px; padding: 8px 12px;
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px;
+  }
+  .file-picker-preview img{ width: 44px; height: 44px; border-radius: 10px; object-fit: cover; border: 1px solid var(--line); }
+  .file-picker-preview span{ font-size: 12.5px; color: var(--text); word-break: break-all; }
+
+  /* ---------- ADMIN DELETE ON CARDS ---------- */
+  .community-card{ position: relative; }
+  .card-delete{
+    display: none; position: absolute; top: 10px; right: 10px; z-index: 3;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(15,23,42,0.6); color: #fff; border: none; cursor: pointer;
+    align-items: center; justify-content: center; font-size: 13px;
+    backdrop-filter: blur(4px); transition: background .18s ease, transform .18s ease;
+  }
+  .card-delete:hover{ background: #e0554d; transform: scale(1.08); }
+  body.is-admin .card-delete{ display: flex; }
+
+  /* ---------- AUTH MODAL VISUALS ---------- */
+  .auth-box{
+    position: relative; overflow: hidden;
+    background: linear-gradient(165deg, #ffffff 0%, #eaf2ff 55%, #dbeafe 100%);
+    padding-top: 34px;
+  }
+  .auth-stars{ position: absolute; inset: 0; top: 0; height: 150px; pointer-events: none; overflow: hidden; }
+  .auth-star{
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    background: #fff; box-shadow: 0 0 8px 2px rgba(37,99,235,0.55);
+    animation: authTwinkle 2.6s ease-in-out infinite;
+  }
+  @keyframes authTwinkle{
+    0%, 100%{ opacity: .15; transform: scale(.7); }
+    50%{ opacity: 1; transform: scale(1.3); }
+  }
+  .auth-logo-wrap{
+    position: relative; z-index: 2;
+    width: 84px; height: 84px; margin: 0 auto 18px;
+    border-radius: 50%; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 28px rgba(37,99,235,0.28), 0 0 0 4px rgba(255,255,255,0.9);
+    animation: authLogoFloat 3.2s ease-in-out infinite;
+  }
+  .auth-logo-img{ width: 62px; height: 62px; border-radius: 50%; object-fit: cover; }
+  @keyframes authLogoFloat{
+    0%, 100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-10px); }
+  }
+  #authViewLogin, #authViewRegister{ position: relative; z-index: 2; }
+  .auth-box h3{ text-align: center; }
+  .auth-box .modal-note{ text-align: center; }
+  .auth-switch{ text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .auth-switch a{ color: var(--accent); font-weight: 700; text-decoration: none; }
+  .auth-switch a:hover{ text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<header>
+  <div class="wrap">
+    <div class="navcaps">
+      <div class="logo"><img src="https://i.ibb.co.com/hRC3CXr8/IMG-20260803-WA0005.jpg" alt="Logo Ditz SAMP" class="logo-img"> DitzSAMP</div>
+      <div class="nav-right">
+        <a class="btn btn-primary" href="https://wa.me/6285215311435" target="_blank" rel="noopener"><span class="btn-label">Order</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div id="homeContent">
+
+  <section class="hero">
+      <h1>Hosting & jasa review buat server <span class="grad">SA-MP</span> kamu.</h1>
+      <p>Beli hosting dengan harga murah, dan jasa review lengkap buat naikin nama server. Legal, cepat, dan bergaransi.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wa.me/6285215311435" target="_blank" rel="noopener">Order via WhatsApp</a>
+        <a class="btn btn-ghost" href="https://whatsapp.com/channel/0029Vb7XBtN4NViqrvyVdE25" target="_blank" rel="noopener">Cek Testimoni & Channel</a>
+      </div>
+
+      <div class="pill-stats">
+        <div class="pill-stat"><div class="num">20+</div><div class="label">Pilihan slot<strong>20–200 player</strong></div></div>
+        <div class="pill-stat"><div class="num">30d</div><div class="label">Garansi<strong>Aktif 1 bulan penuh</strong></div></div>
+        <div class="pill-stat"><div class="num">100%</div><div class="label">Lisensi<strong>Resmi, bukan nulled</strong></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="review">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">Jasa Review</span>
+        <h2>naikin nama server & fitur server, dua cara bayar.</h2>
+        <p>Pilih lewat subscribe channel atau langsung bayar — sama-sama ditangani penuh sampai selesai.</p>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="subs" role="tab">Via Subscribe</button>
+        <button class="tab" data-tab="bayar" role="tab">Via Bayar</button>
+      </div>
+
+      <div class="review-panel active" id="panel-subs">
+        <div class="rev-card"><div class="price">8 <small>subs</small></div><div class="slots">5 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="5 Tempat" data-price="8 Subscribe" aria-label="Order review 5 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="rev-card"><div class="price">10 <small>subs</small></div><div class="slots">7 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="7 Tempat" data-price="10 Subscribe" aria-label="Order review 7 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="rev-card"><div class="price">15 <small>subs</small></div><div class="slots">9 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="9 Tempat" data-price="15 Subscribe" aria-label="Order review 9 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+      </div>
+
+      <div class="review-panel" id="panel-bayar">
+        <div class="rev-card"><div class="price">5K</div><div class="slots">6 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="6 Tempat" data-price="Rp5.000" aria-label="Order review 6 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="rev-card"><div class="price">15K</div><div class="slots">10 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="10 Tempat" data-price="Rp15.000" aria-label="Order review 10 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="rev-card"><div class="price">20K</div><div class="slots">14 tempat / fitur</div><button class="host-order" type="button" data-order data-type="review" data-slot="14 Tempat" data-price="Rp20.000" aria-label="Order review 14 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="rev-card"><div class="price">35K</div><div class="slots">17 tempat / fitur</div><span class="badge">Bebas antri</span><button class="host-order" type="button" data-order data-type="review" data-slot="17 Tempat (No Antri)" data-price="Rp35.000" aria-label="Order review 17 tempat"><i class="fa-solid fa-arrow-right"></i></button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hosting">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">Hosting SA-MP</span>
+        <h2>Pilih slot sesuai keinginan kamu.</h2>
+        <p>Semua paket aktif penuh 1 bulan, garansi berlaku sejak hari pertama.</p>
+      </div>
+
+      <div class="host-grid">
+        <div class="host-card">
+          <div class="ring" style="--pct:10"><span>20</span></div>
+          <div class="host-info"><div class="slot-label">20 Slot Player</div><div class="price-row"><span class="price">Rp5.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="20 Slot Player" data-price="Rp5.000" aria-label="Order 20 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:18"><span>35</span></div>
+          <div class="host-info"><div class="slot-label">35 Slot Player</div><div class="price-row"><span class="price">Rp10.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="35 Slot Player" data-price="Rp10.000" aria-label="Order 35 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:25"><span>50</span></div>
+          <div class="host-info"><div class="slot-label">50 Slot Player</div><div class="price-row"><span class="price">Rp15.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="50 Slot Player" data-price="Rp15.000" aria-label="Order 50 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:40"><span>80</span></div>
+          <div class="host-info"><div class="slot-label">80 Slot Player</div><div class="price-row"><span class="price">Rp25.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="80 Slot Player" data-price="Rp25.000" aria-label="Order 80 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:50"><span>100</span></div>
+          <div class="host-info"><div class="slot-label">100 Slot Player</div><div class="price-row"><span class="price">Rp30.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="100 Slot Player" data-price="Rp30.000" aria-label="Order 100 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:75"><span>150</span></div>
+          <div class="host-info"><div class="slot-label">150 Slot Player</div><div class="price-row"><span class="price">Rp50.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="150 Slot Player" data-price="Rp50.000" aria-label="Order 150 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="ring" style="--pct:100"><span>200</span></div>
+          <div class="host-info"><div class="slot-label">200 Slot Player</div><div class="price-row"><span class="price">Rp65.000</span><span class="per">/ bulan</span></div></div>
+          <button class="host-order" type="button" data-order data-slot="200 Slot Player" data-price="Rp65.000" aria-label="Order 200 slot"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="minicraft">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">Hosting Minicraft</span>
+        <h2>List Hosting Minicraft Intel Xeon</h2>
+        <p>Semua paket aktif penuh 1 bulan, garansi berlaku sejak hari pertama.</p>
+      </div>
+
+      <div class="host-grid">
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 1</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 50% • RAM 1.5 GB • Diskspace 1.5 GB</div>
+            <div class="price-row"><span class="price">Rp10.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 1 (CPU 50%, RAM 1.5GB, Disk 1.5GB)" data-price="Rp10.000" aria-label="Order MC 1"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 2</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 70% • RAM 2.0 GB • Diskspace 2.0 GB</div>
+            <div class="price-row"><span class="price">Rp13.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 2 (CPU 70%, RAM 2.0GB, Disk 2.0GB)" data-price="Rp13.000" aria-label="Order MC 2"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 3</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 100% • RAM 2.5 GB • Diskspace 2.5 GB</div>
+            <div class="price-row"><span class="price">Rp18.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 3 (CPU 100%, RAM 2.5GB, Disk 2.5GB)" data-price="Rp18.000" aria-label="Order MC 3"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 3</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 125% • RAM 3.0 GB • Diskspace 3.0 GB</div>
+            <div class="price-row"><span class="price">Rp23.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 3 (CPU 125%, RAM 3.0GB, Disk 3.0GB)" data-price="Rp23.000" aria-label="Order MC 3 CPU 125"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 4</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 150% • RAM 3.5 GB • Diskspace 3.5 GB</div>
+            <div class="price-row"><span class="price">Rp30.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 4 (CPU 150%, RAM 3.5GB, Disk 3.5GB)" data-price="Rp30.000" aria-label="Order MC 4"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="host-card">
+          <div class="host-info">
+            <div class="slot-label">MC 5</div>
+            <div class="slots" style="font-size:13px;color:var(--muted);margin-top:4px;">CPU 200% • RAM 4.5 GB • Diskspace 4.5 GB</div>
+            <div class="price-row"><span class="price">Rp45.000</span><span class="per">/ bulan</span></div>
+          </div>
+          <button class="host-order" type="button" data-order data-slot="MC 5 (CPU 200%, RAM 4.5GB, Disk 4.5GB)" data-price="Rp45.000" aria-label="Order MC 5"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="keuntungan">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">Keuntungan</span>
+        <h2>Bukan cuma murah — dijamin nyaman dipakai.</h2>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat"><div class="icon"><i class="fa-solid fa-money-bill-wave"></i></div><h3>Harga bersahabat</h3><p>Server tetap lancar meski harga di bawah rata-rata pasaran.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-database"></i></div><h3>MySQL + phpMyAdmin</h3><p>Akses penuh, import database sampai 100MB tanpa hambatan.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Anti-DDoS standar</h3><p>Proteksi dasar aktif buat jaga server tetap stabil.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-user-shield"></i></div><h3>Anti spy</h3><p>Gangguan iseng gak akan tembus ke server kamu.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-check"></i></div><h3>Lisensi resmi</h3><p>100% legal, bukan versi nulled atau bajakan.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-microphone"></i></div><h3>Free port voice</h3><p>Port voice chat disertakan tanpa biaya tambahan.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-folder-open"></i></div><h3>File server aman</h3><p>Data dan file server kamu tersimpan dengan aman.</p></div>
+        <div class="feat"><div class="icon"><i class="fa-solid fa-calendar-check"></i></div><h3>Garansi 1 bulan penuh</h3><p>Aktif dan bergaransi selama satu bulan sejak order.</p></div>
+      </div>
+
+      <div class="trust">
+        <div class="mark"><i class="fa-solid fa-shield-heart"></i></div>
+        <p><strong>Masih ragu soal keamanan?</strong> Insyaallah sudah 100% aman — cek juga testimoni langsung di channel WhatsApp sebelum order.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rating">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-tag">Rating & Komentar</span>
+        <h2>Puas sama layanannya? Kasih rating.</h2>
+        <p>Rating kamu langsung kekirim ke WhatsApp owner, tinggal tap kirim.</p>
+      </div>
+
+      <div class="rating-card">
+        <div class="rating-hint">Rating kepuasan <i class="fa-solid fa-star" style="color:#ffcf4d;"></i></div>
+        <div class="stars" id="starRow"></div>
+        <textarea class="rating-msg" id="ratingMsg" placeholder="Tulis kesan atau pesan kamu di sini..."></textarea>
+        <a class="btn btn-primary rating-submit" id="ratingSubmit" href="#" target="_blank" rel="noopener">Kirim ke WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="wrap">
+      <div class="cta-block">
+        <h2>Ragu-Ragu?</h2>
+        <p>Chat langsung ke owner buat tanya-tanya paket, atau pantau testimoni terbaru di channel.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://wa.me/6285215311435" target="_blank" rel="noopener">Order via WhatsApp</a>
+          <a class="btn btn-ghost" href="https://whatsapp.com/channel/0029Vb7XBtN4NViqrvyVdE25" target="_blank" rel="noopener">Lihat Channel & Testimoni</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><img src="https://i.ibb.co.com/hRC3CXr8/IMG-20260803-WA0005.jpg" alt="Logo Ditz SAMP" class="logo-img"> DitzSAMP</div>
+      <p>Hosting & Jasa Review buat server SA-MP kamu. Legal, cepat, dan bergaransi.</p>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Kontak</h4>
+      <ul>
+        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:ditzreagenz@gmail.com">ditzreagenz@gmail.com</a></li>
+        <li><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/6285215311435" target="_blank" rel="noopener">0852-1531-1435</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+      <h4>Sosial Media</h4>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ditzajah22?igsh=MTh6Z3JscDRoajU4Nw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb7XBtN4NViqrvyVdE25" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://tiktok.com/@ditzajah77" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://youtube.com/@ditzreagenz77?si=SFMFYrCeUGV5mQ3g" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    © <span id="copyYear"></span> DitzSAMP. All Rights Reserved.
+  </div>
+</footer>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    <h3>Detail Order</h3>
+    <div class="order-detail">
+      <div class="detail-row"><span id="modalSlotLabel">Slot Player :</span><strong id="modalSlot"></strong></div>
+      <div class="detail-row"><span>Price :</span><strong id="modalPrice"></strong></div>
+      <div class="detail-warning"><i class="fa-solid fa-triangle-exclamation"></i> Transfer Selain Dana Harus Di Tambah 250 Perak</div>
+    </div>
+    <img src="https://i.ibb.co.com/6cQJhwBs/IMG-20260602-WA0026-3.jpg" alt="QRIS Pembayaran" class="qr-img">
+    <p class="modal-note">Transfer sesuai nominal di atas, lalu pencet DONE untuk chat owner.</p>
+    <p class="modal-note modal-note-tf"><i class="fa-solid fa-camera"></i> Jika sudah transfer, bisa screenshot (SS) bukti TF-nya lalu kirim ke owner di chat WhatsApp yang akan terbuka.</p>
+
+    <button class="btn btn-primary done-btn" id="doneBtn" type="button">DONE <i class="fa-solid fa-check"></i></button>
+  </div>
+</div>
+
+<!-- background music (starts on first tap, per browser autoplay rules) -->
+<div id="ytPlayer" style="position:fixed; width:0; height:0; overflow:hidden;"></div>
+<button class="music-btn paused" id="musicBtn" aria-label="Putar musik">
+  <div class="bars"><span></span><span></span><span></span></div>
+</button>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let ytPlayer, ytReady = false, isPlaying = false;
+  function onYouTubeIframeAPIReady(){
+    ytPlayer = new YT.Player('ytPlayer', {
+      height: '0', width: '0', videoId: 'z_G_9e8Zsf0',
+      // autoplay dimulai dalam kondisi mute (aturan browser), lalu otomatis
+      // unmute begitu ada interaksi pertama dari user (tap/klik/scroll dsb)
+      playerVars: { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: 'z_G_9e8Zsf0' },
+      events: {
+        onReady: (e) => {
+          ytReady = true;
+          e.target.playVideo();
+          isPlaying = true;
+          musicBtn.classList.remove('paused');
+        }
+      }
+    });
+  }
+
+  function tryUnmute(){
+    if(ytReady && ytPlayer.isMuted && ytPlayer.isMuted()){
+      ytPlayer.unMute();
+    }
+  }
+  ['click','touchstart','keydown','scroll'].forEach(evt => {
+    document.addEventListener(evt, tryUnmute, { once: true, passive: true });
+  });
+
+  const musicBtn = document.getElementById('musicBtn');
+  musicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if(!ytReady) return;
+    tryUnmute();
+    if(isPlaying){ ytPlayer.pauseVideo(); musicBtn.classList.add('paused'); }
+    else{ ytPlayer.playVideo(); musicBtn.classList.remove('paused'); }
+    isPlaying = !isPlaying;
+  });
+</script>
+
+<script>
+  const tabs = document.querySelectorAll('[data-tab]');
+  const panels = { subs: document.getElementById('panel-subs'), bayar: document.getElementById('panel-bayar') };
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      Object.values(panels).forEach(p => p.classList.remove('active'));
+      panels[tab.dataset.tab].classList.add('active');
+    });
+  });
+</script>
+
+<script>
+  // rating widget -> builds the WA message and opens wa.me
+  const starRow = document.getElementById('starRow');
+  const STAR_MAX = 5;
+  let selectedRating = 0;
+  const starButtons = [];
+  for(let i=1; i<=STAR_MAX; i++){
+    const b = document.createElement('button');
+    b.className = 'star-btn';
+    b.type = 'button';
+    b.innerHTML = '<i class="fa-solid fa-star"></i>';
+    b.setAttribute('aria-label', `Rating ${i} dari ${STAR_MAX}`);
+    b.addEventListener('click', () => {
+      selectedRating = i;
+      starButtons.forEach((el, idx) => el.classList.toggle('selected', idx < selectedRating));
+      buildRatingLink();
+    });
+    starRow.appendChild(b);
+    starButtons.push(b);
+  }
+
+  const ratingMsg = document.getElementById('ratingMsg');
+  const ratingSubmit = document.getElementById('ratingSubmit');
+
+  function buildRatingLink(){
+    const pesan = ratingMsg.value.trim() || '-';
+    const starsDisplay = selectedRating > 0 ? '🌟'.repeat(selectedRating) : '(belum kasih bintang)';
+    const text =
+`👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾👾
+✨RATING KEPUASAN PELANGGAN✨
+°Rating : ${starsDisplay}
+°Pesan : ${pesan}
+✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨`;
+    ratingSubmit.href = 'https://wa.me/6285215311435?text=' + encodeURIComponent(text);
+  }
+  ratingMsg.addEventListener('input', buildRatingLink);
+  buildRatingLink();
+</script>
+
+<script>
+  // ---- order: hosting pakai modal detail, jasa review langsung ke WA ----
+  const OWNER_WA = '6285215311435';
+  const orderModal = document.getElementById('orderModal');
+  const modalSlotLabel = document.getElementById('modalSlotLabel');
+  const modalSlot = document.getElementById('modalSlot');
+  const modalPrice = document.getElementById('modalPrice');
+  const modalClose = document.getElementById('modalClose');
+  const doneBtn = document.getElementById('doneBtn');
+
+  let currentSlot = '', currentPrice = '', currentType = 'hosting';
+
+  function buildWaText(type, slot, price){
+    if(type === 'review'){
+      return `🌟 ORDERAN MASUK 🌟
+Review Server (${slot})
+Price : ${price}
+✨✨✨✨✨✨✨✨✨`;
+    }
+    return `🌟ORDERAN MASUK🌟
+Slot Player : ${slot}
+Price : ${price}
+🌟🌟🌟♥️♥️♥️🌟🌟🌟`;
+  }
+
+  function goToWa(type, slot, price){
+    const text = buildWaText(type, slot, price);
+    window.location.href = 'https://wa.me/' + OWNER_WA + '?text=' + encodeURIComponent(text);
+  }
+
+  function openOrderModal(slot, price){
+    currentSlot = slot;
+    currentPrice = price;
+    currentType = 'hosting';
+    modalSlotLabel.textContent = 'Slot Player :';
+    modalSlot.textContent = slot;
+    modalPrice.textContent = price;
+    orderModal.classList.add('open');
+  }
+  function closeOrderModal(){ orderModal.classList.remove('open'); }
+
+  modalClose.addEventListener('click', closeOrderModal);
+  orderModal.addEventListener('click', (e) => { if(e.target === orderModal) closeOrderModal(); });
+
+  document.querySelectorAll('[data-order]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const type = el.dataset.type || 'hosting';
+      if(type === 'review'){
+        // jasa review: skip modal, langsung ke chat WA owner
+        goToWa('review', el.dataset.slot, el.dataset.price);
+      } else {
+        // hosting: tampilkan detail order dulu (QRIS, warning, dll)
+        openOrderModal(el.dataset.slot, el.dataset.price);
+      }
+    });
+  });
+
+  doneBtn.addEventListener('click', () => {
+    goToWa(currentType, currentSlot, currentPrice);
+    closeOrderModal();
+  });
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-analytics.js";
+  import { getDatabase, ref as dbRef, push, set, get, child, onValue, remove } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-storage.js";
+
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCmQ0nnj8UrbDQf0w70fbUJmu18VUHmXiM",
+  authDomain: "ditzstore-5c48c.firebaseapp.com",
+  databaseURL: "https://ditzstore-5c48c-default-rtdb.firebaseio.com",
+  projectId: "ditzstore-5c48c",
+  storageBucket: "ditzstore-5c48c.firebasestorage.app",
+  messagingSenderId: "342146815836",
+  appId: "1:342146815836:web:82db0925e44aa2b800d399",
+  measurementId: "G-T0LQ21GKF6"
+};
+
+  const fbApp = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(fbApp);
+  const db = getDatabase(fbApp);
+  const storage = getStorage(fbApp);
+
+  // ---------- helpers ----------
+  async function hashPassword(pw){
+    const enc = new TextEncoder().encode(pw);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  function formatDate(ts){
+    if(!ts) return '';
+    return new Date(ts).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+  }
+  function sanitizeUserKey(u){
+    return u.trim().replace(/[.#$\[\]\/]/g, '_');
+  }
+
+  // ---------- AUTH ----------
+  const authModal = document.getElementById('authModal');
+  const authViewLogin = document.getElementById('authViewLogin');
+  const authViewRegister = document.getElementById('authViewRegister');
+  const authUsername = document.getElementById('authUsername');
+  const authPassword = document.getElementById('authPassword');
+  const authError = document.getElementById('authError');
+  const authSubmit = document.getElementById('authSubmit');
+  const goRegister = document.getElementById('goRegister');
+  const goLogin = document.getElementById('goLogin');
+  const regUsername = document.getElementById('regUsername');
+  const regPassword = document.getElementById('regPassword');
+  const regPasswordConfirm = document.getElementById('regPasswordConfirm');
+  const regError = document.getElementById('regError');
+  const regSubmit = document.getElementById('regSubmit');
+  const userChip = document.getElementById('userChip');
+  const userChipName = document.getElementById('userChipName');
+  const userChipCrown = document.getElementById('userChipCrown');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const addFab = document.getElementById('addFab');
+
+  let currentUser = null;
+  let isAdmin = false;
+
+  document.body.classList.add('auth-locked');
+
+  function showLoginView(){
+    authViewRegister.style.display = 'none';
+    authViewLogin.style.display = 'block';
+    authError.style.display = 'none';
+    regError.style.display = 'none';
+  }
+  function showRegisterView(){
+    authViewLogin.style.display = 'none';
+    authViewRegister.style.display = 'block';
+    authError.style.display = 'none';
+    regError.style.display = 'none';
+  }
+  goRegister.addEventListener('click', (e) => { e.preventDefault(); showRegisterView(); });
+  goLogin.addEventListener('click', (e) => { e.preventDefault(); showLoginView(); });
+
+  function applyLoggedInUI(username){
+    isAdmin = username.toLowerCase() === 'ditzganteng';
+    userChipName.textContent = username;
+    userChipCrown.style.display = isAdmin ? 'inline-block' : 'none';
+    logoutBtn.style.display = isAdmin ? 'flex' : 'none';
+    userChip.style.display = 'flex';
+    addFab.style.display = isAdmin ? 'flex' : 'none';
+    document.body.classList.toggle('is-admin', isAdmin);
+    authModal.classList.remove('open');
+    document.body.classList.remove('auth-locked');
+  }
+
+  async function tryLogin(rawUsername, password){
+    authError.style.display = 'none';
+    const username = rawUsername.trim();
+    if(!username || !password){
+      authError.textContent = 'Username & password wajib diisi.';
+      authError.style.display = 'block';
+      return;
+    }
+    authSubmit.disabled = true;
+    try{
+      const uKey = sanitizeUserKey(username);
+      const snap = await get(child(dbRef(db), 'users/' + uKey));
+      if(!snap.exists()){
+        authError.textContent = 'Akun belum terdaftar. Pencet "Buat dulu sini" buat daftar.';
+        authError.style.display = 'block';
+        authSubmit.disabled = false;
+        return;
+      }
+      const data = snap.val();
+      const hash = await hashPassword(password);
+      if(data.password !== hash){
+        authError.textContent = 'Password salah.';
+        authError.style.display = 'block';
+        authSubmit.disabled = false;
+        return;
+      }
+      currentUser = data.username || username;
+      localStorage.setItem('ditz_user', currentUser);
+      applyLoggedInUI(currentUser);
+    } catch(err){
+      authError.textContent = 'Gagal konek ke server, coba lagi.';
+      authError.style.display = 'block';
+    }
+    authSubmit.disabled = false;
+  }
+
+  async function tryRegister(rawUsername, password, passwordConfirm){
+    regError.style.display = 'none';
+    const username = rawUsername.trim();
+    if(!username || !password || !passwordConfirm){
+      regError.textContent = 'Semua field wajib diisi.';
+      regError.style.display = 'block';
+      return;
+    }
+    if(password !== passwordConfirm){
+      regError.textContent = 'Verifikasi password tidak cocok.';
+      regError.style.display = 'block';
+      return;
+    }
+    if(password.length < 4){
+      regError.textContent = 'Password minimal 4 karakter.';
+      regError.style.display = 'block';
+      return;
+    }
+    regSubmit.disabled = true;
+    try{
+      const uKey = sanitizeUserKey(username);
+      const snap = await get(child(dbRef(db), 'users/' + uKey));
+      if(snap.exists()){
+        regError.textContent = 'Username udah dipakai, coba masuk aja.';
+        regError.style.display = 'block';
+        regSubmit.disabled = false;
+        return;
+      }
+      const hash = await hashPassword(password);
+      await set(dbRef(db, 'users/' + uKey), { username: username, password: hash, createdAt: Date.now() });
+      currentUser = username;
+      localStorage.setItem('ditz_user', currentUser);
+      applyLoggedInUI(currentUser);
+    } catch(err){
+      regError.textContent = 'Gagal konek ke server, coba lagi.';
+      regError.style.display = 'block';
+    }
+    regSubmit.disabled = false;
+  }
+
+  authSubmit.addEventListener('click', () => tryLogin(authUsername.value, authPassword.value));
+  authPassword.addEventListener('keydown', (e) => { if(e.key === 'Enter') authSubmit.click(); });
+  authUsername.addEventListener('keydown', (e) => { if(e.key === 'Enter') authPassword.focus(); });
+
+  regSubmit.addEventListener('click', () => tryRegister(regUsername.value, regPassword.value, regPasswordConfirm.value));
+  regPasswordConfirm.addEventListener('keydown', (e) => { if(e.key === 'Enter') regSubmit.click(); });
+  regPassword.addEventListener('keydown', (e) => { if(e.key === 'Enter') regPasswordConfirm.focus(); });
+  regUsername.addEventListener('keydown', (e) => { if(e.key === 'Enter') regPassword.focus(); });
+
+  logoutBtn.addEventListener('click', () => {
+    if(!isAdmin) return;
+    localStorage.removeItem('ditz_user');
+    currentUser = null; isAdmin = false;
+    userChip.style.display = 'none';
+    addFab.style.display = 'none';
+    authUsername.value = ''; authPassword.value = '';
+    showLoginView();
+    authModal.classList.add('open');
+    document.body.classList.add('auth-locked');
+  });
+
+  const savedUser = localStorage.getItem('ditz_user');
+  if(savedUser){
+    currentUser = savedUser;
+    applyLoggedInUI(savedUser);
+  } else {
+    authModal.classList.add('open');
+  }
+
+  // ---------- COMMUNITY SLIDER / HAMBURGER SIDEBAR MENU ----------
+  const slideTabs = document.querySelectorAll('[data-slide]');
+  const slidePanels = { review: document.getElementById('slide-review'), gamemode: document.getElementById('slide-gamemode') };
+  const sliderTrack = document.getElementById('sliderTrack');
+  const communityViewport = document.getElementById('communityViewport');
+  const homeContent = document.getElementById('homeContent');
+  const menuToggleBtn = document.getElementById('menuToggleBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const sideMenuBackdrop = document.getElementById('sideMenuBackdrop');
+  const sideMenuClose = document.getElementById('sideMenuClose');
+  let activeSlide = 'home';
+
+  function openSideMenu(){
+    sideMenu.classList.add('open');
+    sideMenuBackdrop.classList.add('open');
+  }
+  function closeSideMenu(){
+    sideMenu.classList.remove('open');
+    sideMenuBackdrop.classList.remove('open');
+  }
+
+  function setSlide(key){
+    activeSlide = key;
+    slideTabs.forEach(t => t.classList.toggle('active', t.dataset.slide === key));
+    if(key === 'home'){
+      homeContent.style.display = 'block';
+      communityViewport.style.display = 'none';
+    } else {
+      homeContent.style.display = 'none';
+      communityViewport.style.display = 'block';
+      sliderTrack.style.transform = key === 'review' ? 'translateX(0%)' : 'translateX(-50%)';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeSideMenu();
+  }
+  slideTabs.forEach(t => t.addEventListener('click', () => setSlide(t.dataset.slide)));
+
+  menuToggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if(sideMenu.classList.contains('open')) closeSideMenu(); else openSideMenu();
+  });
+  sideMenuClose.addEventListener('click', closeSideMenu);
+  sideMenuBackdrop.addEventListener('click', closeSideMenu);
+
+  const sliderViewport = document.querySelector('.slider-viewport');
+  let touchStartX = 0;
+  sliderViewport.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  sliderViewport.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) < 40) return;
+    if(dx < 0 && activeSlide === 'review') setSlide('gamemode');
+    if(dx > 0 && activeSlide === 'gamemode') setSlide('review');
+  }, { passive: true });
+
+  function renderCard(item, type){
+    const card = document.createElement('div');
+    card.className = 'community-card';
+    card.innerHTML = `
+      <button class="card-delete" data-key="${item.key}" data-type="${type}" type="button" aria-label="Hapus"><i class="fa-solid fa-trash"></i></button>
+      <img src="${item.image}" alt="${(item.description||'').slice(0,40)}" loading="lazy">
+      <div class="body">
+        <p class="desc"></p>
+        <div class="meta"><span class="meta-author"></span><span class="meta-date"></span></div>
+        <a class="btn btn-ghost link-btn" href="${item.link}" target="_blank" rel="noopener">
+          ${type === 'review' ? '<i class="fa-brands fa-youtube"></i> Tonton Review' : '<i class="fa-solid fa-download"></i> Download Gamemode'}
+        </a>
+      </div>`;
+    card.querySelector('.desc').textContent = item.description || '';
+    card.querySelector('.meta-author').textContent = item.author || 'Anonim';
+    card.querySelector('.meta-date').textContent = formatDate(item.timestamp);
+    return card;
+  }
+
+  function renderList(snap, listEl, type){
+    listEl.innerHTML = '';
+    const items = [];
+    snap.forEach(c => items.push({ key: c.key, ...c.val() }));
+    if(items.length === 0){
+      listEl.innerHTML = `<p class="empty-note">Belum ada ${type === 'review' ? 'review server' : 'gamemode'}. Jadi yang pertama share!</p>`;
+      return;
+    }
+    items.sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
+    items.forEach(item => listEl.appendChild(renderCard(item, type)));
+  }
+
+  onValue(dbRef(db, 'reviews'), (snap) => renderList(snap, slidePanels.review, 'review'));
+  onValue(dbRef(db, 'gamemodes'), (snap) => renderList(snap, slidePanels.gamemode, 'gamemode'));
+
+  // ---------- ADMIN DELETE ----------
+  document.addEventListener('click', async (e) => {
+    const delBtn = e.target.closest('.card-delete');
+    if(!delBtn || !isAdmin) return;
+    const key = delBtn.dataset.key;
+    const type = delBtn.dataset.type;
+    if(!confirm('Yakin mau hapus konten ini?')) return;
+    delBtn.disabled = true;
+    try{
+      const path = type === 'review' ? 'reviews' : 'gamemodes';
+      await remove(dbRef(db, path + '/' + key));
+    } catch(err){
+      alert('Gagal hapus, coba lagi.');
+      delBtn.disabled = false;
+    }
+  });
+
+  // ---------- ADD MODAL ----------
+  const addModal = document.getElementById('addModal');
+  const addModalClose = document.getElementById('addModalClose');
+  const addTabs = document.querySelectorAll('[data-addtab]');
+  const addLinkLabel = document.getElementById('addLinkLabel');
+  const addForm = document.getElementById('addForm');
+  const addPhoto = document.getElementById('addPhoto');
+  const filePickerBtn = document.getElementById('filePickerBtn');
+  const filePickerPreview = document.getElementById('filePickerPreview');
+  const filePickerImg = document.getElementById('filePickerImg');
+  const filePickerName = document.getElementById('filePickerName');
+  const addLink = document.getElementById('addLink');
+  const addDesc = document.getElementById('addDesc');
+  const addError = document.getElementById('addError');
+  const addSubmitBtn = document.getElementById('addSubmitBtn');
+  let addType = 'review';
+
+  addPhoto.addEventListener('change', () => {
+    const file = addPhoto.files[0];
+    if(!file){
+      filePickerPreview.style.display = 'none';
+      filePickerBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Pilih Foto';
+      return;
+    }
+    filePickerName.textContent = file.name;
+    filePickerBtn.innerHTML = '<i class="fa-solid fa-rotate"></i> Ganti Foto';
+    const reader = new FileReader();
+    reader.onload = (e) => { filePickerImg.src = e.target.result; };
+    reader.readAsDataURL(file);
+    filePickerPreview.style.display = 'flex';
+  });
+
+  addFab.addEventListener('click', () => addModal.classList.add('open'));
+  addModalClose.addEventListener('click', () => addModal.classList.remove('open'));
+  addModal.addEventListener('click', (e) => { if(e.target === addModal) addModal.classList.remove('open'); });
+
+  addTabs.forEach(t => t.addEventListener('click', () => {
+    addTabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    addType = t.dataset.addtab;
+    addLinkLabel.textContent = addType === 'review' ? 'Link YouTube' : 'Link Gamemode';
+    addLink.placeholder = addType === 'review' ? 'https://youtu.be/...' : 'https://...';
+  }));
+
+  addForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    addError.style.display = 'none';
+    const file = addPhoto.files[0];
+    const link = addLink.value.trim();
+    const desc = addDesc.value.trim();
+    if(!file || !link || !desc){
+      addError.textContent = 'Semua field wajib diisi.';
+      addError.style.display = 'block';
+      return;
+    }
+    addSubmitBtn.disabled = true;
+    addSubmitBtn.innerHTML = 'Mengupload... <i class="fa-solid fa-spinner fa-spin"></i>';
+    try{
+      const path = (addType === 'review' ? 'reviews_photos/' : 'gamemodes_photos/') + Date.now() + '_' + file.name;
+      const fileRef = storageRef(storage, path);
+      await uploadBytes(fileRef, file);
+      const imageUrl = await getDownloadURL(fileRef);
+      const targetPath = addType === 'review' ? 'reviews' : 'gamemodes';
+      const newRef = push(dbRef(db, targetPath));
+      await set(newRef, {
+        image: imageUrl,
+        link: link,
+        description: desc,
+        author: currentUser || 'Anonim',
+        timestamp: Date.now()
+      });
+      addForm.reset();
+      filePickerPreview.style.display = 'none';
+      filePickerBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Pilih Foto';
+      addModal.classList.remove('open');
+    } catch(err){
+      addError.textContent = 'Upload gagal, coba lagi. (' + (err.code || err.message || 'error') + ')';
+      addError.style.display = 'block';
+    }
+    addSubmitBtn.disabled = false;
+    addSubmitBtn.innerHTML = 'Upload <i class="fa-solid fa-upload"></i>';
+  });
+</script>
+
+</body>
+</html>
